@@ -1,0 +1,71 @@
+# === Java / Spring / Maven ===
+target/
+*.class
+*.war
+*.jar
+.classpath
+.project
+.settings/
+*.tmp
+
+# === IDE Eclipse ===
+.idea/
+*.iml
+.factorypath
+.springBeans
+
+# === Python (environnement NLP) ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+venv/
+env/
+.env/
+.venv/
+conda-env/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+
+# === Fichiers Python spécifiques ===
+pip-log.txt
+pip-delete-this-directory.txt
+dist/
+build/
+*.egg-info/
+*.egg
+
+# === Logs ===
+logs/
+*.log
+training_logs/
+*.out
+
+# === Modèles entraînés (fichiers lourds) ===
+*.pkl
+*.joblib
+*.h5
+*.pth
+*.pt
+*.bin
+saved_models/
+
+# === OS spécifique ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === Fichiers temporaires ===
+*.swp
+*.swo
+*~
+*.bak
+*.tmp
+
+# === Secrets / configuration ===
+application-local.properties
+application-dev.properties
+*.key
+*.pem
+.env.local

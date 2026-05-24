@@ -1,0 +1,19 @@
+@charset "UTF-8";
+body {
+    background-color: #f8f9fa;
+}
+.card {
+    border-radius: 10px;
+}
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.alert {
+    border-radius: 5px;
+}
+.table th, .table td {
+    vertical-align: middle;
+}
+.pagination {
+    justify-content: center;
+}

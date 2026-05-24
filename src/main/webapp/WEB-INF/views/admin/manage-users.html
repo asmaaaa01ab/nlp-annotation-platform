@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gérer les annotateurs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{header :: header}"></div>
+<div class="container mt-4">
+    <h2>Gérer les annotateurs</h2>
+
+    <a th:href="@{/admin/annotateur/creer}"
+       class="btn btn-primary mb-3">
+        + Créer un annotateur
+    </a>
+
+    <div th:if="${erreur}" class="alert alert-danger"
+         th:text="${erreur}">
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Login</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- annotateurs = List<Utilisateur> -->
+                    <tr th:each="annotateur : ${annotateurs}">
+                        <td th:text="${annotateur.nom}"></td>
+                        <td th:text="${annotateur.prenom}"></td>
+                        <td th:text="${annotateur.login}"></td>
+                        <td>
+                            <a th:href="@{/admin/annotateur/{id}/modifier(id=${annotateur.id})}"
+                               class="btn btn-warning btn-sm">
+                                Modifier
+                            </a>
+                            <!-- Suppression logique en POST -->
+                            <form th:action="@{/admin/annotateur/{id}/supprimer(id=${annotateur.id})}"
+                                  method="post" class="d-inline">
+                                <button type="submit"
+                                        class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Confirmer la suppression ?')">
+                                    Supprimer
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

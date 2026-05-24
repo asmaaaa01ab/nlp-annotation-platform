@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau de bord</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{header :: header}"></div>
+<div class="container mt-4">
+    <h2>Tableau de bord</h2>
+
+    <!-- Statistiques globales -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary">
+                <div class="card-body">
+                    <h5>Datasets</h5>
+                    <h2 th:text="${nbDatasets}">0</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success">
+                <div class="card-body">
+                    <h5>Annotateurs actifs</h5>
+                    <h2 th:text="${nbAnnotateurs}">0</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Boutons actions -->
+    <div class="d-flex gap-2 mb-3">
+        <a th:href="@{/admin/dataset/creer}" class="btn btn-primary">
+            + Créer un dataset
+        </a>
+        <a th:href="@{/admin/annotateurs}" class="btn btn-success">
+            Gérer les annotateurs
+        </a>
+    </div>
+
+    <!-- Table des datasets -->
+    <div class="card">
+        <div class="card-header">Datasets</div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Avancement moyen</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="dataset : ${datasets}">
+                        <td th:text="${dataset.nomDataset}"></td>
+                        <td>
+                            <span th:text="${#maps.containsKey(avancementMap, dataset.id)} ? ${avancementMap[dataset.id]} + '%' : '0%'">0%</span>
+                        </td>
+                        <td>
+                            <a th:href="@{/admin/dataset/{id}/details(id=${dataset.id})}"
+                               class="btn btn-info btn-sm">
+                                Détails
+                            </a>
+                            <a th:href="@{/admin/dataset/{id}/annotateurs(id=${dataset.id})}"
+                               class="btn btn-warning btn-sm">
+                                Affecter annotateurs
+                            </a>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(datasets)}">
+                        <td colspan="3" class="text-center text-muted">Aucun dataset créé</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
